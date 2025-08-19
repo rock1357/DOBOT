@@ -1,6 +1,7 @@
 #include "mainwindow.h"
-#include "QMessageBox"
-#include <QKeyEvent>
+#include "gameareaselector.h"
+#include <iostream>
+
 
 // Constructor: initializes the UI and connects the Start button
 MainWindow::MainWindow(QWidget *parent)
@@ -8,8 +9,16 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this); // Sets up the UI from the .ui file
-    connect(ui->Start, &QPushButton::clicked, this, &MainWindow::onStartBoT);
-    // When the "Start" button is clicked, call onStartBoT()
+    //Connection to the start of the bot
+    connect(ui->pbStart, &QPushButton::clicked, this, &MainWindow::onStartBoT); // When the "Start" button is clicked, call onStartBoT()
+
+
+    GameAreaSelector selector("Dark Orbit");
+    selector.selectAreas();
+    RECT playable = selector.getPlayableArea();
+    RECT map      = selector.getMapArea();
+
+
 }
 
 // Destructor: cleans up thread and UI

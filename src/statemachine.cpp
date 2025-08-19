@@ -22,7 +22,7 @@ StateMachine::StateMachine(QObject *parent)
 
     }
 
-    // Automatically call run() when the object is created
+    // Automatically call run() when the object is created. Single shot is used in the constructor.
     QTimer::singleShot(0, this, &StateMachine::run);
 }
 
@@ -36,8 +36,8 @@ void StateMachine::run()
     // Connect the timer timeout to the transition() slot
     connect(m_startTimer, &QTimer::timeout, this, &StateMachine::transition);
 
-    // Start the timer to call transition() every 1000 milliseconds (1 second)
-    m_startTimer->start(1000);  // Adjust the interval as needed
+    // Start the timer to call transition() every 100 milliseconds (0.1 second)
+    m_startTimer->start(100);  // Adjust the interval as needed
 
     // Initial logging and state
     log("Bot started. Entering run loop...");

@@ -34,6 +34,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(DOBOT
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+
     )
 
 target_include_directories(DOBOT PRIVATE
@@ -61,6 +62,20 @@ endif()
 
 target_link_libraries(DOBOT PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 target_link_libraries(DOBOT PRIVATE Qt6::Core)
+
+# --- Standalone test executable in scripts/ ---
+add_executable(TargetWindowTest
+    ${CMAKE_SOURCE_DIR}/scripts/targetwindow_test.cpp
+)
+
+target_include_directories(TargetWindowTest PRIVATE
+    ${CMAKE_SOURCE_DIR}/include
+)
+
+target_link_libraries(TargetWindowTest PRIVATE
+    Qt${QT_VERSION_MAJOR}::Core
+    Qt${QT_VERSION_MAJOR}::Widgets
+)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
